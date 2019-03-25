@@ -22,6 +22,10 @@
      * model = User
      * fields = ['username', 'email', 'password1', 'password2']
 ## setting.py
+- INSTALLED_APPS = [
+    * 'blog.apps.BlogConfig',
+    * 'users.apps.UsersConfig',
+    * 'crispy_forms',
  - STATIC_URL = '/static/'
  - MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
  - MEDIA_URL = '/media/'
