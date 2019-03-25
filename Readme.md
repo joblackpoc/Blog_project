@@ -8,8 +8,7 @@
  - forms.py -> pip install django-crispy-forms, pip install --upgrade django-crispy-forms
  - crispy bootstrap4
  - login and logout system
- - User Profie and Picture
- - pip install Pillow
+ - User Profie and Picture -> pip install Pillow
  - signals.py
 ## forms.py
  - from django import forms
