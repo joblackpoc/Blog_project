@@ -9,6 +9,7 @@
  - crispy bootstrap4
  - login and logout system
  - User Profie and Picture
+ - pip install Pillow
  - signals.py
 ## forms.py
  - from django import forms
