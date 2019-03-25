@@ -8,3 +8,5 @@
  - forms.py
  - crispy bootstrap4
  - login and logout system
+ - User Profie and Picture
+ - signals.py
