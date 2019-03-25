@@ -16,11 +16,11 @@
  - from django.contrib.auth.forms import UserCreationForm
 
  - class UserRegisterForm(UserCreationForm):
-   -- email = forms.EmailField()
+   * email = forms.EmailField()
 
   - class Meta:
-     -- model = User
-     -- fields = ['username', 'email', 'password1', 'password2']
+     * model = User
+     * fields = ['username', 'email', 'password1', 'password2']
 ## setting.py
  - STATIC_URL = '/static/'
  - MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -36,9 +36,9 @@
 
  - @receiver(post_save, sender=User)
  - def create_profile(sender, instance, created, **kwargs):
-    -- if created:
+    * if created:
         --- Profile.objects.create(user=instance)
 
  - @receiver(post_save, sender=User)
  - def save_profile(sender, instance, **kwargs):
-    -- instance.profile.save()
+    * instance.profile.save()
