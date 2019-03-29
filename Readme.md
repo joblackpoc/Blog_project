@@ -3,7 +3,7 @@
 ## Blog app + User app
  - Use Shift + Tab -> move multiple line to left
  - static -> blog -> main.css
- - template -> blog -> base.html, home.html, about.html
+ - template -> blog -> base.html, home.html, about.html, post_confirm_delete.html, post_detail.html, post_form.html
  - template -> users -> register.html, login.html, logout.html, profile.html
  - python manage.py makemigrations, python manage.py migrate
  - forms.py -> pip install django-crispy-forms, pip install --upgrade django-crispy-forms
@@ -11,6 +11,7 @@
  - login and logout system
  - User Profie and Picture -> pip install Pillow
  - signals.py
+ - CRUD post
  
 ## urls.py
  - from django.contrib import admin
