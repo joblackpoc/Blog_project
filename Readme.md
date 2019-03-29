@@ -1,6 +1,7 @@
 # Django Python Framework
 ## SQLite database 0001
 ## Blog app + User app
+ - Use Shift + Tab -> move multiple line to left
  - static -> blog -> main.css
  - template -> blog -> base.html, home.html, about.html
  - template -> users -> register.html, login.html, logout.html, profile.html
