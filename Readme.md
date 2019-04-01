@@ -12,61 +12,43 @@
  - User Profie and Picture -> pip install Pillow
  - signals.py
  - CRUD post
- 
-## urls.py
-  from django.contrib import admin<br/>
-  from django.contrib.auth import views as auth_views<br/>
-  from django.urls import path, include<br/>
-  from django.conf import settings<br/>
-  from django.conf.urls.static import static<br/>
-  from users import views as user_views<br/>
-<br/>
-  urlpatterns = <br/>
-  [<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; path('admin/', admin.site.urls),<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path('register/', user_views.register, name='register'),<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path('profile/', user_views.profile, name='profile'),<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path('', include('blog.urls')),<br/>
- ]<br/>
-<br/>
-  if settings.DEBUG:<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-## forms.py<br/>
-  from django import forms<br/>
-  from django.contrib.auth.models import User<br/>
-  from django.contrib.auth.forms import UserCreationForm<br/>
-<br/>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class UserRegisterForm(UserCreationForm):<br/>
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; email = forms.EmailField()<br/>
-<br/>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; class Meta:<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; model = User<br/>
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fields = ['username', 'email', 'password1', 'password2']<br/>
-## setting.py<br/>
- INSTALLED_APPS = <br/>
- [<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'blog.apps.BlogConfig',<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'users.apps.UsersConfig',<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 'crispy_forms',<br/>
-  STATIC_URL = '/static/'<br/>
-  MEDIA_ROOT = os.path.join(BASE_DIR, 'media')<br/>
-  MEDIA_URL = '/media/'<br/>
-  CRISPY_TEMPLATE_PACK = 'bootstrap4'<br/>
-  LOGIN_REDIRECT_URL = 'blog-home'<br/>
-  LOGIN_URL = 'login'<br/>
-## signals.py<br/>
-  from django.db.models.signals import post_save<br/>
-  from django.contrib.auth.models import User<br/>
-  from django.dispatch import receiver<br/>
-  from .models import Profile<br/>
-<br/>
-  @receiver(post_save, sender=User)<br/>
-  def create_profile(sender, instance, created, **kwargs):<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if created:<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Profile.objects.create(user=instance)<br/>
+ - Paginator
+ *user_posts.html
+**{% extends 'blog/base.html' %}
+**{% block content %}
+  **<h1 class="mb-3">Post by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    **{% for post in posts %}
+      **<article class="media content-section">
+        **<img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+          **<div class="media-body">
+            **<div class="article-metadata">
+              **<a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+              **<small class="text-muted">{{ post.date_posted|date:"d F Y, H:i" }}</small>
+            **</div>
+            **<h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            **<p class="article-content">{{ post.content }}</p>
+          **</div>
+        **</article>
+    **{% endfor %}
+    **{% if is_paginated %}
 
-  @receiver(post_save, sender=User)<br/>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; def save_profile(sender, instance, **kwargs):<br/>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instance.profile.save()<br/>
+      **{% if page_obj.has_previous %}
+        **<a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        **<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      **{% endif %}
+
+      **{% for num in page_obj.paginator.page_range %}
+        **{% if page_obj.number == num %}
+          **<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        **{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          **<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        **{% endif %}
+      **{% endfor %}
+
+      **{% if page_obj.has_next %}
+        **<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        **<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      **{% endif %}
+
+    **{% endif %} 
+**{% endblock content %}
