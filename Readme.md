@@ -16,23 +16,23 @@
 <br/>
      {% if is_paginated %}
 <br/>
-       {% if page_obj.has_previous %} <br/>
-         <a class="btn btn-outline-info mb-4" href="?page=1">First</a> <br/>
-         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a> <br/>
-       {% endif %} <br/>
+       {% if page_obj.has_previous %}
+         <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+       {% endif %}
 <br/>
-       {% for num in page_obj.paginator.page_range %} <br/>
-         {% if page_obj.number == num %} <br/>
-           <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a> <br/>
-         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %} <br/>
-           <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a> <br/>
-         {% endif %} <br/>
-       {% endfor %} <br/>
+       {% for num in page_obj.paginator.page_range %}
+         {% if page_obj.number == num %}
+           <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+           <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+         {% endif %}
+       {% endfor %}
 <br/>
-       {% if page_obj.has_next %} <br/>
-         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a> <br/>
-         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a> <br/>
-       {% endif %} <br/>
+       {% if page_obj.has_next %}
+         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+         <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+       {% endif %}
 <br/>
-     {% endif %} <br/>
+     {% endif %}
 
