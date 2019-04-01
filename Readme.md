@@ -12,43 +12,43 @@
  - User Profie and Picture -> pip install Pillow
  - signals.py
  - CRUD post
- - Paginator<br/>
- * user_posts.html<br/>
-* {% extends 'blog/base.html' %}<br/>
-* {% block content %}<br/>
-  * <h1 class="mb-3">Post by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1><br/>
-    * {% for post in posts %}<br/>
-      * <article class="media content-section"><br/>
-        * <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"><br/>
-          * <div class="media-body"><br/>
-            * <div class="article-metadata"><br/>
-              * <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a><br/>
-              * <small class="text-muted">{{ post.date_posted|date:"d F Y, H:i" }}</small><br/>
-            * </div><br/>
-            * <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2><br/>
-            * <p class="article-content">{{ post.content }}</p><br/>
-          * </div><br/>
-        * </article><br/>
-    * {% endfor %}<br/>
-    * {% if is_paginated %}<br/>
+ - Paginator
+ * user_posts.html
+* {% extends 'blog/base.html' %}
+* {% block content %}
+  * <h1 class="mb-3">Post by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+    * {% for post in posts %}
+      * <article class="media content-section">
+        * <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+          * <div class="media-body">
+            * <div class="article-metadata">
+              * <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
+              * <small class="text-muted">{{ post.date_posted|date:"d F Y, H:i" }}</small>
+            * </div>
+            * <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
+            * <p class="article-content">{{ post.content }}</p>
+          * </div>
+        * </article>
+    * {% endfor %}
+    * {% if is_paginated %}
 <br/>
-      * {% if page_obj.has_previous %}<br/>
-        * <a class="btn btn-outline-info mb-4" href="?page=1">First</a><br/>
-        * <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a><br/>
-      * {% endif %}<br/>
+      * {% if page_obj.has_previous %}
+        * <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        * <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      * {% endif %}
 <br/>
-      * {% for num in page_obj.paginator.page_range %}<br/>
-        * {% if page_obj.number == num %}<br/>
-          * <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a><br/>
-        * {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}<br/>
-          * <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a><br/>
-        * {% endif %}<br/>
-      * {% endfor %}<br/>
+      * {% for num in page_obj.paginator.page_range %}
+        * {% if page_obj.number == num %}
+          * <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        * {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          * <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        * {% endif %}
+      * {% endfor %}
 <br/>
-      * {% if page_obj.has_next %}<br/>
-        * <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a><br/>
-        * <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a><br/>
-      * {% endif %}<br/>
+      * {% if page_obj.has_next %}
+        * <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        * <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      * {% endif %}
 <br/>
-    * {% endif %} <br/>
-* {% endblock content %}<br/>
+    * {% endif %} 
+* {% endblock content %}
