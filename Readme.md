@@ -4,7 +4,7 @@
  - Use Shift + Tab -> move multiple line to left
  - static -> blog -> main.css
  - template -> blog -> base.html, home.html, about.html, post_confirm_delete.html, post_detail.html, post_form.html, user_posts.html
- - template -> users -> register.html, login.html, logout.html, profile.html
+ - template -> users -> register.html, login.html, logout.html, profile.html, password_reset.html, password_reset_done.html, password_reset_confirm.html, password_reset_complete.html
  - python manage.py makemigrations, python manage.py migrate
  - forms.py -> pip install django-crispy-forms, pip install --upgrade django-crispy-forms
  - crispy bootstrap4
@@ -13,6 +13,22 @@
  - signals.py
  - CRUD post
  - Paginator -> user_posts.html
+ - Password reset by Email (gmail Apps Password sign in)
+ - pip install virtualenv
+ - heroku login
+ - pip install gunicorn
+ - virtualenv name
+ - run -> "C:\Blog\Blog_project\blog_project\Scripts\activate.bat"
+ - pip install pandas
+ - pip freeze > requirement.txt
+ - git init
+ - .gitignore
+ - git add -A
+ - git commit -m "Initial Commit"
+ - heroku create appname -> https:appname.herokuapp.com
+ - heroku buildpacks:set heroku/python
+ - git push heroku master
+
  
 ## urls.py
  - from django.contrib import admin
