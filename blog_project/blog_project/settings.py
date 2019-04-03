@@ -25,7 +25,7 @@ SECRET_KEY = 'v^2=h0-t+)$+-)q8#lxdg1do5e%ey*m-m#fc$gu8lfmq#))iaw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://blog-natthawut.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
